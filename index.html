@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="bootstrap.min.css">
+
+	<script type="text/javascript" src="TuringMachine.js">
+	</script>    
+	
+	<script type="text/javascript">
+		var machine = new TuringMachine();
+	
+		function run() {
+			setup();						
+			machine.run();
+			
+			setTape(machine.getTape());
+		}
+		
+		function setup() {
+			machine.setStates(getStates());
+			machine.setInputSymbols(getInputSymbols());
+			machine.setInitialState(getInitialState());
+			machine.setFinalStates(getFinalStates());
+			machine.setTransitions(getTransitions());
+			machine.setTape(getTape());
+		}
+		
+		function getStates() {
+			return $("states").value;
+		}
+		
+		function getInputSymbols() {
+			return $("inputSymbols").value;
+		}
+		
+		function getInitialState() {
+			return $("initialState").value;
+		}
+		
+		function getFinalStates() {
+			return $("finalStates").value;
+		}
+		
+		function getTransitions() {
+			return $("transitions").value.split("\n");
+		}
+		
+		function getTape() {
+			return $("tape").value;
+		}
+		
+		function setTape(tape) {
+			$("tape").value = tape;
+		}
+		
+		function $(id) {
+			return document.getElementById(id);
+		}
+		
+	</script>
+	
+	<style type="text/css">
+      html, body {
+        background-color: #eee;
+      }
+            
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+      
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+      
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }  	 
+	  
+	  .input {
+		font-size:30px;
+	  }
+    </style>
+	
+</head>
+
+<body>
+	<div class="container">
+		<div class="content">
+			<div class="page-header">
+				<h1>Máquina de Turing de uma fita de uma via em JavaScript</h1>
+			</div>
+			<form>				
+				<fieldset>
+					<div class="row">
+						<div class="span16">
+							<div class="row">								
+								<div class="span8">													
+									<div class="clearfix">
+										<label for="states">Estados</label>
+										<div class="input">
+											<input class="span5" type="text" name="states" id="states" value="q0,q1,h"/>
+										</div>
+									</div>
+								</div>								
+								<div class="span8">							
+									<div class="clearfix">
+										<label for="inputSymbols">Símbolos de entrada</label>
+										<div class="input">
+											<input class="span5" type="text" name="inputSymbols" id="inputSymbols" value="a,b,_" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">								
+								<div class="span8">							
+									<div class="clearfix">								
+										<label for="initialState">Estado inicial</label>
+										<div class="input">
+											<input class="span5" type="text" name="initialState" id="initialState" value="q0" />
+										</div>
+									</div>
+								</div>							
+								<div class="span8">							
+									<div class="clearfix">
+										<label for="finalStates">Estados de parada</label>
+										<div class="input">
+											<input class="span5" type="text" name="finalStates" id="finalStates" value="h" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">								
+								<div class="span8">
+									<div class="clearfix">
+										<label for="transitions">Transições</label>
+										<div class="input">
+											<textarea class="xlarge" name="transitions" id="transitions" rows="10">q0,a,q0,>>
+q0,b,q0,_
+q0,_,q1,>>
+q1,a,q0,_
+q1,b,q0,_
+q1,_,h,_</textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+					</div>
+					<div class="row">						
+						<div class="span8">
+							<div class="clearfix">
+								<label for="tape">Fita</label>
+								<div class="input">
+									<input class="span13" type"text" name="tape" id="tape" value="aabab"/>
+								</div>
+							</div>
+						</div>
+					</div>										
+				</fieldset>
+				<div class="actions">
+						<input type="button" onclick="run()" class="btn primary" value="Executar máquina" />
+				</div>
+			</form>			
+		</div>
+	</div>		
+</body>
+
+</html>
